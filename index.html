@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>KSU Coffee</title>
+    <style>
+        /* กำหนดตัวแปรสีสำหรับโหมดสว่าง */
+        :root {
+            --bg-color: #f3ece7;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #777777;
+            --accent-color: #5c3a21;
+            --border-color: #e0e0e0;
+            --hover-bg: #fdfdfd;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* กำหนดตัวแปรสีสำหรับโหมดมืด */
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --text-main: #f0f0f0;
+            --text-muted: #aaaaaa;
+            --accent-color: #e3a87c;
+            --border-color: #444444;
+            --hover-bg: #383838;
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            background-color: var(--bg-color); 
+            color: var(--text-main);
+            padding: 50px 20px; 
+            margin: 0;
+            /* เพิ่มลูกเล่นให้ตอนเปลี่ยนสีดูนุ่มนวล */
+            transition: background-color 0.4s ease, color 0.4s ease; 
+        }
+
+        .menu-container { 
+            background: var(--card-bg); 
+            padding: 40px 30px; 
+            border-radius: 15px; 
+            display: inline-block; 
+            box-shadow: var(--shadow);
+            min-width: 320px;
+            transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease; 
+        }
+        .menu-container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 { 
+            color: var(--accent-color); 
+            font-size: 2.5em;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            transition: color 0.4s ease;
+        }
+
+        .student-info {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .version { 
+            color: var(--text-muted); 
+            font-size: 13px; 
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        ul { 
+            list-style: none; 
+            padding: 0; 
+        }
+
+        li { 
+            font-size: 18px; 
+            margin: 10px 0; 
+            border-bottom: 1px dashed var(--border-color); 
+            padding: 12px 15px; 
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between; /* แยกชื่อเมนูกับราคาซ้ายขวา */
+            cursor: pointer;
+            transition: all 0.3s ease; 
+        }
+
+        /* ลูกเล่นขยายขนาดและเปลี่ยนสีตอนเอาเมาส์ชี้เมนู */
+        li:hover {
+            background-color: var(--hover-bg);
+            transform: scale(1.03);
+            color: var(--accent-color);
+            font-weight: bold;
+            border-bottom-color: transparent;
+        }
+
+        /* ปุ่มสลับโหมด */
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: var(--card-bg);
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <!-- ปุ่มสลับโหมดเรียกใช้ฟังก์ชัน toggleTheme() -->
+        <button class="theme-toggle" onclick="toggleTheme()">🌙 สลับโหมดมืด</button>
+        
+        <h1>KSU Coffee ☕</h1>
+        <p class="student-info">โดย: นาย กิตติพัฒน์ ประชุมสาร (&lt;671540005012-3&gt;)</p>
+        <p class="version">Menu v2</p>
+        
+        <ul>
+            <li><span>อเมริกาโน่เย็น</span> <span>50 ฿</span></li>
+            <li><span>ลาเต้เย็น</span> <span>60 ฿</span></li>
+            <li><span>มัทฉะลาเต้</span> <span>65 ฿</span></li>
+            <li><span>คาปูชิอ้วง</span> <span>55 ฿</span></li>
+        </ul><a href="http://localhost:8081" class="promo-link">ดูโปรโมชั่น</a>
+    </div>
+
+    <!-- สคริปต์สำหรับสลับคลาสเพื่อเปิด/ปิดโหมดมืด -->
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const button = document.querySelector('.theme-toggle');
+            
+            // ตรวจสอบว่าเปิดโหมดมืดอยู่หรือไม่
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                button.innerHTML = '🌙 สลับโหมดมืด';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                button.innerHTML = '☀️ สลับโหมดสว่าง';
+            }
+        }
+    </script>
+</body>
+</html>
